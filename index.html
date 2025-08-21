@@ -733,12 +733,11 @@
             </button>
             <h1>Olayan Food Services</h1>
             <h2>Application Dashboard</h2>
-            <p>Access all web applications and local software from a single gateway</p>
+            <p>Access all web applications from a single gateway</p>
         </header>
         
         <div class="tabs">
             <button class="tab-btn active" data-tab="web-apps">Web Apps</button>
-            <button class="tab-btn" data-tab="local-apps">Local Software</button>
             <button class="tab-btn" data-tab="all-apps">All Apps</button>
         </div>
         
@@ -914,93 +913,6 @@
             </div>
         </div>
         
-        <div class="tab-content" id="local-apps">
-            <h2 class="section-title">Local Software</h2>
-            
-            <div class="search-container">
-                <input type="text" id="localSearch" placeholder="Search for software...">
-                <button class="search-btn"><i class="fas fa-search"></i> Search</button>
-            </div>
- 
-            <div class="apps-grid">
-                <div class="app-card" data-name="Visual Studio Code" data-type="local">
-                    <div class="app-icon"><i class="fas fa-code"></i></div>
-                    <h3>VS Code</h3>
-                    <p>Lightweight but powerful source code editor</p>
-                    <span class="app-badge local-badge">Local App</span>
-                    <div class="app-actions">
-                        <button class="action-btn run-btn"><i class="fas fa-play"></i> Run</button>
-                        <button class="action-btn settings-btn config-btn"><i class="fas fa-cog"></i> Configure</button>
-                    </div>
-                </div>
-                
-                <div class="app-card" data-name="Microsoft Excel" data-type="local">
-                    <div class="app-icon"><i class="fas fa-file-excel"></i></div>
-                    <h3>Excel</h3>
-                    <p>Spreadsheet program for data analysis and visualization</p>
-                    <span class="app-badge local-badge">Local App</span>
-                    <div class="app-actions">
-                        <button class="action-btn run-btn"><i class="fas fa-play"></i> Run</button>
-                        <button class="action-btn settings-btn config-btn"><i class="fas fa-cog"></i> Configure</button>
-                    </div>
-                </div>
-                
-                <div class="app-card" data-name="Adobe Photoshop" data-type="local">
-                    <div class="app-icon"><i class="fas fa-paint-brush"></i></div>
-                    <h3>Photoshop</h3>
-                    <p>Professional image editing and graphic design software</p>
-                    <span class="app-badge local-badge">Local App</span>
-                    <div class="app-actions">
-                        <button class="action-btn run-btn"><i class="fas fa-play"></i> Run</button>
-                        <button class="action-btn settings-btn config-btn"><i class="fas fa-cog"></i> Configure</button>
-                    </div>
-                </div>
-                
-                <div class="app-card" data-name="Inventory Manager" data-type="local">
-                    <div class="app-icon"><i class="fas fa-boxes"></i></div>
-                    <h3>Inventory</h3>
-                    <p>Manage stock levels and track inventory movements</p>
-                    <span class="app-badge local-badge">Local App</span>
-                    <div class="app-actions">
-                        <button class="action-btn run-btn"><i class="fas fa-play"></i> Run</button>
-                        <button class="action-btn settings-btn config-btn"><i class="fas fa-cog"></i> Configure</button>
-                    </div>
-                </div>
-                
-                <div class="app-card" data-name="Notepad++" data-type="local">
-                    <div class="app-icon"><i class="fas fa-sticky-note"></i></div>
-                    <h3>Notepad++</h3>
-                    <p>Source code editor and Notepad replacement</p>
-                    <span class="app-badge local-badge">Local App</span>
-                    <div class="app-actions">
-                        <button class="action-btn run-btn"><i class="fas fa-play"></i> Run</button>
-                        <button class="action-btn settings-btn config-btn"><i class="fas fa-cog"></i> Configure</button>
-                    </div>
-                </div>
-                
-                <div class="app-card" data-name="VLC Media Player" data-type="local">
-                    <div class="app-icon"><i class="fas fa-film"></i></div>
-                    <h3>VLC Player</h3>
-                    <p>Free and open-source cross-platform multimedia player</p>
-                    <span class="app-badge local-badge">Local App</span>
-                    <div class="app-actions">
-                        <button class="action-btn run-btn"><i class="fas fa-play"></i> Run</button>
-                        <button class="action-btn settings-btn config-btn"><i class="fas fa-cog"></i> Configure</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="instructions">
-                <h3><i class="fas fa-info-circle"></i> Local Software Instructions</h3>
-                <p>Local applications must be installed on your computer to run. Configure the path to the executable file before running.</p>
-                <ul>
-                    <li>Click <strong>Configure</strong> to set the path to the executable file</li>
-                    <li>Use <code>C:\Program Files\AppName\app.exe</code> format for paths</li>
-                    <li>Add launch parameters if needed (e.g., <code>-fullscreen</code>)</li>
-                </ul>
-            </div>
-        </div>
-        
         <div class="tab-content" id="all-apps">
             <h2 class="section-title">All Applications</h2>
             
@@ -1019,60 +931,16 @@
         </footer>
     </div>
     
-    <!-- Configuration Modal -->
-    <div class="modal" id="configModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 class="modal-title"><span class="modal-icon" id="modalAppIcon"></span> <span id="modalAppName">Application</span> Configuration</h2>
-            
-            <div class="form-group">
-                <label for="exePath">Path to Executable (.exe file)</label>
-                <input type="text" id="exePath" class="form-control" placeholder="e.g., C:\Program Files\AppName\app.exe">
-            </div>
-            
-            <div class="form-group">
-                <label for="launchParams">Launch Parameters (Optional)</label>
-                <input type="text" id="launchParams" class="form-control" placeholder="e.g., -fullscreen -debug">
-            </div>
-            
-            <button class="save-btn" id="saveConfig"><i class="fas fa-save"></i> Save Configuration</button>
-        </div>
-    </div>
-    
     <script>
         // DOM Elements
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
         const runBtns = document.querySelectorAll('.run-btn');
-        const configBtns = document.querySelectorAll('.config-btn');
-        const configModal = document.getElementById('configModal');
-        const closeModal = document.querySelector('.close-modal');
-        const saveConfigBtn = document.getElementById('saveConfig');
-        const exePathInput = document.getElementById('exePath');
-        const launchParamsInput = document.getElementById('launchParams');
-        const modalAppName = document.getElementById('modalAppName');
-        const modalAppIcon = document.getElementById('modalAppIcon');
         const searchInputs = document.querySelectorAll('input[type="text"]');
         const themeToggle = document.getElementById('themeToggle');
         
-        // Current app being configured
-        let currentConfigApp = null;
-        
-        // Sample local app configurations
-        const appConfigs = {
-            'Visual Studio Code': { path: '', params: '' },
-            'Microsoft Excel': { path: '', params: '' },
-            'Adobe Photoshop': { path: '', params: '' },
-            'Inventory Manager': { path: '', params: '' },
-            'Notepad++': { path: '', params: '' },
-            'VLC Media Player': { path: '', params: '' }
-        };
-        
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            // Load saved configurations
-            loadConfigurations();
-            
             // Load theme preference
             loadThemePreference();
             
@@ -1104,54 +972,6 @@
                 });
             });
             
-            // Set up run buttons for local apps
-            document.querySelectorAll('.app-card[data-type="local"] .run-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const card = this.closest('.app-card');
-                    const appName = card.getAttribute('data-name');
-                    const config = appConfigs[appName];
-                    
-                    if (config && config.path) {
-                        launchLocalApp(config.path, config.params);
-                    } else {
-                        alert(`Please configure the path for ${appName} first.`);
-                    }
-                });
-            });
-            
-            // Set up configuration buttons
-            configBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const card = this.closest('.app-card');
-                    const appName = card.getAttribute('data-name');
-                    const icon = card.querySelector('.app-icon').innerHTML;
-                    
-                    openConfigModal(appName, icon);
-                });
-            });
-            
-            // Close modal
-            closeModal.addEventListener('click', function() {
-                configModal.style.display = 'none';
-            });
-            
-            // Save configuration
-            saveConfigBtn.addEventListener('click', function() {
-                if (currentConfigApp) {
-                    appConfigs[currentConfigApp].path = exePathInput.value;
-                    appConfigs[currentConfigApp].params = launchParamsInput.value;
-                    
-                    // Save to localStorage
-                    localStorage.setItem(`appConfig_${currentConfigApp}`, JSON.stringify({
-                        path: exePathInput.value,
-                        params: launchParamsInput.value
-                    }));
-                    
-                    alert(`Configuration saved for ${currentConfigApp}!`);
-                    configModal.style.display = 'none';
-                }
-            });
-            
             // Set up search functionality
             searchInputs.forEach(input => {
                 input.addEventListener('input', function() {
@@ -1179,21 +999,6 @@
             });
         });
         
-        // Load saved configurations from localStorage
-        function loadConfigurations() {
-            for (const appName in appConfigs) {
-                const savedConfig = localStorage.getItem(`appConfig_${appName}`);
-                if (savedConfig) {
-                    try {
-                        const config = JSON.parse(savedConfig);
-                        appConfigs[appName] = config;
-                    } catch (e) {
-                        console.error('Error parsing config for', appName, e);
-                    }
-                }
-            }
-        }
-        
         // Load theme preference
         function loadThemePreference() {
             const savedTheme = localStorage.getItem('theme');
@@ -1217,45 +1022,6 @@
             }
         }
         
-        // Open configuration modal
-        function openConfigModal(appName, icon) {
-            currentConfigApp = appName;
-            modalAppName.textContent = appName;
-            modalAppIcon.innerHTML = icon;
-            
-            // Fill form with existing config
-            exePathInput.value = appConfigs[appName].path || '';
-            launchParamsInput.value = appConfigs[appName].params || '';
-            
-            configModal.style.display = 'flex';
-        }
-        
-        // Launch local application
-        function launchLocalApp(path, params) {
-            // Security note: This is a simplified approach for demonstration.
-            // In a real-world scenario, you would need a more secure method.
-            
-            try {
-                // Create a hidden iframe to handle the launch
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = `file:///${path}?${params}`;
-                document.body.appendChild(iframe);
-                
-                // Remove after a delay
-                setTimeout(() => {
-                    document.body.removeChild(iframe);
-                }, 1000);
-                
-                // Show success message
-                const appName = path.split('\\').pop().split('/').pop();
-                alert(`Launching ${appName}...`);
-            } catch (error) {
-                console.error('Error launching application:', error);
-                alert(`Could not launch application. Please check the path and try again.\nError: ${error.message}`);
-            }
-        }
-        
         // Populate "All Apps" tab
         function populateAllAppsTab() {
             const allAppsGrid = document.querySelector('#all-apps .apps-grid');
@@ -1263,7 +1029,6 @@
             
             // Get all app cards
             const webApps = document.querySelectorAll('#web-apps .app-card');
-            const localApps = document.querySelectorAll('#local-apps .app-card');
             
             // Clone and add web apps
             webApps.forEach(app => {
@@ -1276,38 +1041,7 @@
                     window.open(url, '_blank');
                 });
             });
-            
-            // Clone and add local apps
-            localApps.forEach(app => {
-                const clone = app.cloneNode(true);
-                allAppsGrid.appendChild(clone);
-                
-                // Reattach event listeners
-                clone.querySelector('.run-btn').addEventListener('click', function() {
-                    const appName = clone.getAttribute('data-name');
-                    const config = appConfigs[appName];
-                    
-                    if (config && config.path) {
-                        launchLocalApp(config.path, config.params);
-                    } else {
-                        alert(`Please configure the path for ${appName} first.`);
-                    }
-                });
-                
-                clone.querySelector('.config-btn').addEventListener('click', function() {
-                    const appName = clone.getAttribute('data-name');
-                    const icon = clone.querySelector('.app-icon').innerHTML;
-                    openConfigModal(appName, icon);
-                });
-            });
         }
-        
-        // Close modal if clicked outside
-        window.addEventListener('click', function(event) {
-            if (event.target === configModal) {
-                configModal.style.display = 'none';
-            }
-        });
     </script>
 </body>
 </html>
