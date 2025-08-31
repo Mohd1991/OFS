@@ -341,10 +341,6 @@
             background: linear-gradient(to right, var(--success), #96c93d);
         }
         
-        .local-badge {
-            background: linear-gradient(to right, #ff5e62, var(--warning));
-        }
-        
         .app-actions {
             margin-top: 20px;
             display: flex;
@@ -375,26 +371,6 @@
         .run-btn:hover {
             background: linear-gradient(to right, #5c6efc, #4a5afc);
             transform: translateY(-2px);
-        }
-        
-        .settings-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
-        }
-        
-        body.light-mode .settings-btn {
-            background: rgba(100, 110, 200, 0.1);
-            color: #5a5a8a;
-        }
-        
-        .settings-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-        
-        body.light-mode .settings-btn:hover {
-            background: rgba(100, 110, 200, 0.2);
-            color: var(--light-text);
         }
         
         .search-container {
@@ -519,6 +495,9 @@
             color: var(--text-muted);
             font-size: 0.95rem;
             border-top: 1px solid rgba(90, 110, 230, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         body.light-mode footer {
@@ -526,124 +505,12 @@
             border-top: 1px solid rgba(140, 160, 255, 0.3);
         }
         
-        /* Modals */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+        .footer-left {
+            text-align: left;
         }
         
-        .modal-content {
-            background: rgba(25, 30, 55, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 90%;
-            border: 1px solid rgba(90, 110, 230, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
-        
-        body.light-mode .modal-content {
-            background: rgba(245, 247, 255, 0.95);
-            border: 1px solid rgba(140, 160, 255, 0.7);
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .close-modal:hover {
-            color: var(--secondary);
-        }
-        
-        .modal-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        body.light-mode .modal-title {
-            color: #4a5afc;
-        }
-        
-        .modal-icon {
-            font-size: 2rem;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        
-        body.light-mode .form-group label {
-            color: #5a5a8a;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 8px;
-            background: rgba(20, 25, 45, 0.7);
-            border: 1px solid rgba(90, 110, 230, 0.3);
-            color: white;
-            font-size: 1rem;
-        }
-        
-        body.light-mode .form-control {
-            background: rgba(240, 244, 255, 0.7);
-            border: 1px solid rgba(140, 160, 255, 0.5);
-            color: var(--light-text);
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(106, 130, 251, 0.3);
-        }
-        
-        .save-btn {
-            padding: 12px 30px;
-            background: linear-gradient(to right, var(--primary), #5c6efc);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            margin-top: 10px;
-        }
-        
-        .save-btn:hover {
-            background: linear-gradient(to right, #5c6efc, #4a5afc);
-            transform: translateY(-2px);
+        .footer-right {
+            text-align: right;
         }
         
         /* Responsive Design */
@@ -722,6 +589,19 @@
             header h2 {
                 font-size: 1.3rem;
             }
+            
+            .tabs {
+                display: none; /* Hide tabs since we only have one */
+            }
+            
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .footer-left, .footer-right {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -732,23 +612,18 @@
                 <i class="fas fa-moon"></i>
             </button>
             <h1>Olayan Food Services</h1>
-            <h2>Application Dashboard</h2>
+ 
             <p>Access all web applications from a single gateway</p>
         </header>
         
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="web-apps">Web Apps</button>
-            <button class="tab-btn" data-tab="all-apps">All Apps</button>
-        </div>
-        
         <div class="tab-content active" id="web-apps">
-            <h2 class="section-title">Web Applications</h2>
+            <h2 class="section-title"> Burger King - Sahaba</h2>
             
             <div class="search-container">
                 <input type="text" id="appSearch" placeholder="Search for applications...">
                 <button class="search-btn"><i class="fas fa-search"></i> Search</button>
-            </div>
-            
+            </div>	
+			
             <div class="apps-grid">
                 <div class="app-card" data-name="Olayan Mail" data-type="web" data-url="https://outlook.office.com/">
                     <div class="app-icon"><i class="fas fa-envelope"></i></div>
@@ -757,8 +632,26 @@
                     <div class="app-actions">
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
+					
                 </div>
-                
+	                <div class="app-card" data-name="All PDF Converter" data-type="web" data-url="https://www.webtool.world">
+                    <div class="app-icon"><i class="far fa-file-word"></i></div>
+                    <h3>Doc Converter</h3>
+                    <span class="app-badge web-badge">Web Site</span>
+                    <div class="app-actions">
+                        <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
+                    </div>
+                </div>			
+
+				<div class="app-card" data-name="WhatApp" data-type="web" data-url="https://thetools.in/">
+                    <div class="app-icon"><i class="fas fa-file-pdf"></i></div>
+                    <h3>PDF Converter</h3>
+                    <span class="app-badge web-badge">Web Site</span>
+                    <div class="app-actions">
+                        <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
+                    </div>
+                </div>
+				
                 <div class="app-card" data-name="HR - Help Desk " data-type="web" data-url="https://olayanhrhelpdesk.myfreshworks.com/login">
                     <div class="app-icon"><i class="fas fa-headset"></i></div>
                     <h3>HR Help Desk</h3>
@@ -847,17 +740,9 @@
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div>				
-                <div class="app-card" data-name="All PDF Converter" data-type="web" data-url="https://www.webtool.world">
-                    <div class="app-icon"><i class="fas fa-file-pdf"></i></div>
-                    <h3>PDF Converter</h3>
-                    <span class="app-badge web-badge">Web App</span>
-                    <div class="app-actions">
-                        <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
-                    </div>
-                </div>
                 
-                <div class="app-card" data-name="Drive-Trough" data-type="web" data-url="http://192.168.140.71/DashboardTemplate17.aspx">
-                    <div class="app-icon"><i class="fas fa-car-side"></i></div>
+                <div class="app-card" data-name="Drive-Trough" data-type="web" data-url="http://192.168.53.72/DashboardTemplate17.aspx">
+                    <div class="app-icon"><i class="fas fa-car"></i></div>
                     <h3>Drive-Thru</h3>
                     <span class="app-badge web-badge">Web App</span>
                     <div class="app-actions">
@@ -866,7 +751,7 @@
                 </div>
                 
                 <div class="app-card" data-name="Go - Win" data-type="web" data-url="https://web-sa.me.restaurant-partners.com/login?logout=1">
-                    <div class="app-icon"><i class="fas fa-motorcycle"></i></div>
+                    <div class="app-icon"><i class="fas fa-hamburger"></i></div>
                     <h3>Go - Win</h3>
                     <span class="app-badge web-badge">Web App</span>
                     <div class="app-actions">
@@ -874,7 +759,7 @@
                     </div>
                 </div>
                 
-                <div class="app-card" data-name="Acrelec KIOSK " data-type="web" data-url="http://192.168.183.105:53521/">
+                <div class="app-card" data-name="Acrelec KIOSK " data-type="web" data-url="http://192.168.53.105:53521/en/Dashboard/Login">
                     <div class="app-icon"><i class="fa-solid fa-mobile-button"></i></div>
                     <h3>Acrelec KIOSK </h3>
                     <span class="app-badge web-badge">Web App</span>
@@ -891,10 +776,12 @@
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div>
+				
+				
                 
-                <div class="app-card" data-name="Inventory" data-type="web" data-url="#">
-                    <div class="app-icon"><i class="fas fa-boxes"></i></div>
-                    <h3>Inventory</h3>
+                <div class="app-card" data-name="Internet Modem" data-type="web" data-url="https://192.168.53.1">
+                    <div class="app-icon"><i class="fas fa-broadcast-tower"></i></div>
+                    <h3>Internet Modem</h3>
                     <span class="app-badge web-badge">Web App</span>
                     <div class="app-actions">
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
@@ -913,30 +800,19 @@
             </div>
         </div>
         
-        <div class="tab-content" id="all-apps">
-            <h2 class="section-title">All Applications</h2>
-            
-            <div class="search-container">
-                <input type="text" id="allSearch" placeholder="Search all applications...">
-                <button class="search-btn"><i class="fas fa-search"></i> Search</button>
-            </div>
-            
-            <div class="apps-grid">
-                <!-- All apps will be shown here dynamically -->
-            </div>
-        </div>
-        
         <footer>
-            <p>Application Dashboard &copy; 2023 | Access all your applications from one place</p>
+            <div class="footer-left">
+                <p>Application Dashboard &copy; 2023 | Access all your applications from one place</p>
+            </div>
+            <div class="footer-right">
+                <p>Created By Muzakkir</p>
+            </div>
         </footer>
     </div>
     
     <script>
         // DOM Elements
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        const runBtns = document.querySelectorAll('.run-btn');
-        const searchInputs = document.querySelectorAll('input[type="text"]');
+        const searchInput = document.getElementById('appSearch');
         const themeToggle = document.getElementById('themeToggle');
         
         // Initialize page
@@ -944,49 +820,31 @@
             // Load theme preference
             loadThemePreference();
             
-            // Set up tab switching
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Remove active class from all tabs
-                    tabBtns.forEach(b => b.classList.remove('active'));
-                    tabContents.forEach(c => c.classList.remove('active'));
-                    
-                    // Add active class to clicked tab
-                    this.classList.add('active');
-                    const tabId = this.getAttribute('data-tab');
-                    document.getElementById(tabId).classList.add('active');
-                    
-                    // Populate "All Apps" tab when activated
-                    if (tabId === 'all-apps') {
-                        populateAllAppsTab();
-                    }
-                });
-            });
-            
             // Set up run buttons for web apps
             document.querySelectorAll('.app-card[data-type="web"] .run-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const card = this.closest('.app-card');
                     const url = card.getAttribute('data-url');
-                    window.open(url, '_blank');
+                    if (url && url !== '#') {
+                        window.open(url, '_blank');
+                    } else {
+                        alert('This application is not yet configured. Please contact your administrator.');
+                    }
                 });
             });
             
             // Set up search functionality
-            searchInputs.forEach(input => {
-                input.addEventListener('input', function() {
-                    const searchTerm = this.value.toLowerCase();
-                    const tabId = this.closest('.tab-content').id;
-                    const cards = document.querySelectorAll(`#${tabId} .app-card`);
-                    
-                    cards.forEach(card => {
-                        const appName = card.getAttribute('data-name').toLowerCase();
-                        if (appName.includes(searchTerm)) {
-                            card.style.display = 'flex';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.app-card');
+                
+                cards.forEach(card => {
+                    const appName = card.getAttribute('data-name').toLowerCase();
+                    if (appName.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
                 });
             });
             
@@ -1020,27 +878,6 @@
                 icon.classList.remove('fa-sun');
                 icon.classList.add('fa-moon');
             }
-        }
-        
-        // Populate "All Apps" tab
-        function populateAllAppsTab() {
-            const allAppsGrid = document.querySelector('#all-apps .apps-grid');
-            allAppsGrid.innerHTML = '';
-            
-            // Get all app cards
-            const webApps = document.querySelectorAll('#web-apps .app-card');
-            
-            // Clone and add web apps
-            webApps.forEach(app => {
-                const clone = app.cloneNode(true);
-                allAppsGrid.appendChild(clone);
-                
-                // Reattach event listeners
-                clone.querySelector('.run-btn').addEventListener('click', function() {
-                    const url = clone.getAttribute('data-url');
-                    window.open(url, '_blank');
-                });
-            });
         }
     </script>
 </body>
