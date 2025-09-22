@@ -16,6 +16,7 @@
             --text-muted: #a0a8ff;
             --success: #00b09b;
             --warning: #ff9966;
+            --error: #ff4757;
             --light-bg: #f0f4ff;
             --light-card: #ffffff;
             --light-text: #1a1a2e;
@@ -341,6 +342,10 @@
             background: linear-gradient(to right, var(--success), #96c93d);
         }
         
+        .offline-badge {
+            background: linear-gradient(to right, var(--error), #ff6b81);
+        }
+        
         .app-actions {
             margin-top: 20px;
             display: flex;
@@ -371,6 +376,28 @@
         .run-btn:hover {
             background: linear-gradient(to right, #5c6efc, #4a5afc);
             transform: translateY(-2px);
+        }
+        
+        .disabled-btn {
+            background: linear-gradient(to right, #cccccc, #aaaaaa);
+            color: #888888;
+            cursor: not-allowed;
+        }
+        
+        .disabled-btn:hover {
+            transform: none;
+            background: linear-gradient(to right, #cccccc, #aaaaaa);
+        }
+        
+        .checking-btn {
+            background: linear-gradient(to right, #888888, #aaaaaa);
+            color: white;
+            cursor: wait;
+        }
+        
+        .checking-btn:hover {
+            transform: none;
+            background: linear-gradient(to right, #888888, #aaaaaa);
         }
         
         .search-container {
@@ -458,6 +485,9 @@
             color: var(--text-muted);
             line-height: 1.7;
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         body.light-mode .instructions p {
@@ -472,6 +502,9 @@
         .instructions li {
             margin-bottom: 10px;
             color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         body.light-mode .instructions li {
@@ -511,6 +544,136 @@
         
         .footer-right {
             text-align: right;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(90, 110, 230, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        body.light-mode .modal-content {
+            background: var(--light-card);
+            border: 1px solid rgba(140, 160, 255, 0.5);
+        }
+        
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--error);
+            margin-bottom: 20px;
+        }
+        
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        body.light-mode .modal h3 {
+            color: var(--light-text);
+        }
+        
+        .modal p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        body.light-mode .modal p {
+            color: #5a5a8a;
+        }
+        
+        .modal-btn {
+            padding: 12px 30px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        .button-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid white;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Status indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-online {
+            background-color: var(--success);
+            box-shadow: 0 0 8px var(--success);
+        }
+        
+        .status-offline {
+            background-color: var(--error);
+            box-shadow: 0 0 8px var(--error);
+        }
+        
+        .status-checking {
+            background-color: #888;
+            box-shadow: 0 0 8px #888;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
         
         /* Responsive Design */
@@ -591,7 +754,7 @@
             }
             
             .tabs {
-                display: none; /* Hide tabs since we only have one */
+                display: none;
             }
             
             footer {
@@ -601,6 +764,18 @@
             
             .footer-left, .footer-right {
                 text-align: center;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .modal-icon {
+                font-size: 3rem;
+            }
+            
+            .modal h3 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -612,18 +787,22 @@
                 <i class="fas fa-moon"></i>
             </button>
             <h1>Olayan Food Services</h1>
- 
+            <h2>Burger King - Gallery Mall (16664)</h2>
             <p>Access all web applications from a single gateway</p>
         </header>
         
+        <div class="tabs">
+            <button class="tab-btn active">Web Applications</button>
+        </div>
+        
         <div class="tab-content active" id="web-apps">
-            <h2 class="section-title"> Burger King - Sahaba</h2>
+            <h2 class="section-title">Available Applications</h2>
             
             <div class="search-container">
                 <input type="text" id="appSearch" placeholder="Search for applications...">
                 <button class="search-btn"><i class="fas fa-search"></i> Search</button>
-            </div>	
-			
+            </div>    
+            
             <div class="apps-grid">
                 <div class="app-card" data-name="Olayan Mail" data-type="web" data-url="https://outlook.office.com/">
                     <div class="app-icon"><i class="fas fa-envelope"></i></div>
@@ -632,18 +811,18 @@
                     <div class="app-actions">
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
-					
                 </div>
-	                <div class="app-card" data-name="All PDF Converter" data-type="web" data-url="https://www.webtool.world">
+                
+                <div class="app-card" data-name="All PDF Converter" data-type="web" data-url="https://www.webtool.world">
                     <div class="app-icon"><i class="far fa-file-word"></i></div>
                     <h3>Doc Converter</h3>
                     <span class="app-badge web-badge">Web Site</span>
                     <div class="app-actions">
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
-                </div>			
+                </div>           
 
-				<div class="app-card" data-name="WhatApp" data-type="web" data-url="https://thetools.in/">
+                <div class="app-card" data-name="WhatApp" data-type="web" data-url="https://thetools.in/">
                     <div class="app-icon"><i class="fas fa-file-pdf"></i></div>
                     <h3>PDF Converter</h3>
                     <span class="app-badge web-badge">Web Site</span>
@@ -651,7 +830,25 @@
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div>
-				
+                
+                <div class="app-card" data-name="Google " data-type="web" data-url="https://google.com">
+                    <div class="app-icon"><i class="fa-brands fa-google"></i></div>
+                    <h3>Google</h3>
+                    <span class="app-badge web-badge">Web App</span>
+                    <div class="app-actions">
+                        <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
+                    </div>
+                </div>
+
+                <div class="app-card" data-name="Youtube" data-type="web" data-url="https://youtube.com">
+                    <div class="app-icon"><i class="fa-brands fa-youtube"></i></div>
+                    <h3>Youtube</h3>
+                    <span class="app-badge web-badge">Web App</span>
+                    <div class="app-actions">
+                        <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
+                    </div>
+                </div>
+
                 <div class="app-card" data-name="HR - Help Desk " data-type="web" data-url="https://olayanhrhelpdesk.myfreshworks.com/login">
                     <div class="app-icon"><i class="fas fa-headset"></i></div>
                     <h3>HR Help Desk</h3>
@@ -660,7 +857,7 @@
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div>
-                
+
                 <div class="app-card" data-name="SuccessFactor " data-type="web" data-url="https://hcm23.sapsf.com/sf/#/login">
                     <div class="app-icon"><i class="fas fa-users-cog"></i></div>
                     <h3>SuccessFactor</h3>
@@ -669,7 +866,7 @@
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div>
-				
+                
                 <div class="app-card" data-name="TimeSheet " data-type="web" data-url="https://myapps.jussuronline.net:7780/sap/bc/webdynpro/sap/zhr_timesheet_entry?saml2=enabled&sap-client=600&sap-language=EN#">
                     <div class="app-icon"><i class="far fa-calendar-alt"></i></div>  
                     <h3>TimeSheet</h3>
@@ -677,7 +874,7 @@
                     <div class="app-actions">
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
-                </div>				
+                </div>                
                 <div class="app-card" data-name="IT & Maintenance Support" data-type="web" data-url="https://sd-ofs.oshco.com/support/home">
                     <div class="app-icon"><i class="fas fa-headset"></i></div>
                     <h3>IT & Maintenance Support</h3>
@@ -685,7 +882,7 @@
                     <div class="app-actions">
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
-                </div>				
+                </div>                
                 
                 <div class="app-card" data-name="bkcrowns" data-type="web" data-url="https://dashboard.bkcrowns.com">
                     <div class="app-icon"><i class="fas fa-crown"></i></div>
@@ -722,7 +919,7 @@
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div>
-				
+                
                 <div class="app-card" data-name="KASO" data-type="web" data-url="https://web.elkaso.app/">
                     <div class="app-icon"><i class="fas fa-headset"></i></div>
                     <h3>KASO</h3>
@@ -731,22 +928,22 @@
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div> 
-				
+                
                 <div class="app-card" data-name="Global Solutions" data-type="web" data-url="https://audits-sai.bw-globalsolutions.com/login">
-                    <div class="app-icon"><i class="fas fa-ss"></i></div>
+                    <div class="app-icon"><i class="fas fa-globe"></i></div>
                     <h3>Global Solutions</h3>
                     <span class="app-badge web-badge">Web App</span>
                     <div class="app-actions">
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
-                </div>				
-                
-                <div class="app-card" data-name="Drive-Trough" data-type="web" data-url="http://192.168.53.72/DashboardTemplate17.aspx">
+                </div>                
+               
+                <div class="app-card" data-name="Drive-Trough" data-type="web" data-url="http://192.168.116.253/DashboardTemplate17.aspx">
                     <div class="app-icon"><i class="fas fa-car"></i></div>
                     <h3>Drive-Thru</h3>
                     <span class="app-badge web-badge">Web App</span>
                     <div class="app-actions">
-                        <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
+                        <button class="action-btn run-btn" id="driveThruBtn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div>
                 
@@ -759,15 +956,15 @@
                     </div>
                 </div>
                 
-                <div class="app-card" data-name="Acrelec KIOSK " data-type="web" data-url="http://192.168.53.105:53521/en/Dashboard/Login">
+                <div class="app-card" data-name="Acrelec KIOSK " data-type="web" data-url="http://192.168.116.105:53521/en/Dashboard/Login">
                     <div class="app-icon"><i class="fa-solid fa-mobile-button"></i></div>
                     <h3>Acrelec KIOSK </h3>
                     <span class="app-badge web-badge">Web App</span>
                     <div class="app-actions">
-                        <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
+                        <button class="action-btn run-btn" id="kioskBtn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div>
-				
+                
                 <div class="app-card" data-name="WhatApp" data-type="web" data-url="https://web.whatsapp.com/">
                     <div class="app-icon"><i class="fab fa-whatsapp"></i></div>
                     <h3>WhatsApp Web</h3>
@@ -776,33 +973,40 @@
                         <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div>
-				
-				
-                
-                <div class="app-card" data-name="Internet Modem" data-type="web" data-url="https://192.168.53.1">
+
+                <div class="app-card" data-name="CCTV" data-type="web" data-url="http://192.168.116.232/">
+                    <div class="app-icon"><i class="fas fa-video"></i></div>
+                    <h3>CCTV</h3>
+                    <span class="app-badge web-badge">Web App</span>
+                    <div class="app-actions">
+                        <button class="action-btn run-btn" id="cctvBtn"><i class="fas fa-external-link-alt"></i> Open</button>
+                    </div>
+                </div>                
+
+                <div class="app-card" data-name="Internet Modem" data-type="web" data-url="https://192.168.116.1">
                     <div class="app-icon"><i class="fas fa-broadcast-tower"></i></div>
                     <h3>Internet Modem</h3>
                     <span class="app-badge web-badge">Web App</span>
                     <div class="app-actions">
-                        <button class="action-btn run-btn"><i class="fas fa-external-link-alt"></i> Open</button>
+                        <button class="action-btn run-btn" id="modemBtn"><i class="fas fa-external-link-alt"></i> Open</button>
                     </div>
                 </div>
             </div>
             
             <div class="instructions">
                 <h3><i class="fas fa-info-circle"></i> Web App Instructions</h3>
-                <p>All web applications open in a new browser tab. Make sure pop-ups are enabled for this site.</p>
+                
                 <ul>
-                    <li>Click the <strong>Open</strong> button to launch any application</li>
-                    <li>Use the search bar to quickly find applications</li>
-                    <li>Bookmark frequently used apps for quick access</li>
+                    <li><i class="fas fa-mouse-pointer"></i> Click the <strong>Open</strong> button to launch any application</li>
+                    <li><i class="fas fa-search"></i> Use the search bar to quickly find applications</li>
+                    <li><i class="fas fa-bookmark"></i> Bookmark frequently used apps for quick access</li>
                 </ul>
             </div>
         </div>
         
         <footer>
             <div class="footer-left">
-                <p>Application Dashboard &copy; 2023 | Access all your applications from one place</p>
+                <p>Application Dashboard &copy; 2025 | Access all your applications from one place</p>
             </div>
             <div class="footer-right">
                 <p>Created By Muzakkir</p>
@@ -810,10 +1014,74 @@
         </footer>
     </div>
     
+    <!-- Offline Modal -->
+    <div class="modal" id="offlineModal">
+        <div class="modal-content">
+            <div class="modal-icon" id="modalIcon">
+                <i class="fas fa-video-slash"></i>
+            </div>
+            <h3 id="modalTitle">System Offline</h3>
+            <p id="modalMessage">The system is currently offline and cannot be accessed. Please try again later or contact technical support if the issue persists.</p>
+            <button class="modal-btn" id="modalCloseBtn">OK</button>
+        </div>
+    </div>
+    
+    <!-- Checking Modal -->
+    <div class="modal" id="checkingModal">
+        <div class="modal-content">
+            <div class="spinner"></div>
+            <h3 id="checkingTitle">Checking System Status</h3>
+            <p id="checkingMessage">Please wait while we check the system connection...</p>
+        </div>
+    </div>
+    
     <script>
         // DOM Elements
         const searchInput = document.getElementById('appSearch');
         const themeToggle = document.getElementById('themeToggle');
+        const offlineModal = document.getElementById('offlineModal');
+        const checkingModal = document.getElementById('checkingModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const checkingTitle = document.getElementById('checkingTitle');
+        const checkingMessage = document.getElementById('checkingMessage');
+        
+        // Connectivity status cache
+        let connectivityStatus = {
+            lastChecked: 0,
+            status: {},
+            cacheDuration: 30000 // 30 seconds
+        };
+        
+        // System-specific icons and messages
+        const systemInfo = {
+            'CCTV': {
+                icon: 'fa-video',
+                offlineIcon: 'fa-video-slash',
+                name: 'CCTV',
+                message: 'The CCTV system is currently offline and cannot be accessed.'
+            },
+            'Internet Modem': {
+                icon: 'fa-broadcast-tower',
+                offlineIcon: 'fa-tower-broadcast',
+                name: 'Internet Modem',
+                message: 'The Internet Modem is currently offline and cannot be accessed.'
+            },
+            'Acrelec KIOSK': {
+                icon: 'fa-mobile-button',
+                offlineIcon: 'fa-mobile-screen',
+                name: 'Acrelec KIOSK',
+                message: 'The Acrelec KIOSK system is currently offline and cannot be accessed.'
+            },
+            'Drive-Trough': {
+                icon: 'fa-car',
+                offlineIcon: 'fa-car-burst',
+                name: 'Drive-Thru',
+                message: 'The Drive-Thru system is currently offline and cannot be accessed.'
+            }
+        };
         
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
@@ -824,8 +1092,41 @@
             document.querySelectorAll('.app-card[data-type="web"] .run-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const card = this.closest('.app-card');
+                    const appName = card.getAttribute('data-name');
                     const url = card.getAttribute('data-url');
-                    if (url && url !== '#') {
+                    const button = this;
+                    
+                    // Check if this is one of the systems that needs connectivity check
+                    if (['CCTV', 'Internet Modem', 'Acrelec KIOSK', 'Drive-Trough'].includes(appName)) {
+                        // Set button to checking state
+                        setButtonCheckingState(button);
+                        
+                        // Show checking modal with system-specific message
+                        checkingTitle.textContent = `Checking ${systemInfo[appName].name} Status`;
+                        checkingMessage.textContent = `Please wait while we check the ${systemInfo[appName].name} connection...`;
+                        checkingModal.style.display = 'flex';
+                        
+                        checkConnectivity(url, appName).then(isOnline => {
+                            // Hide checking modal
+                            checkingModal.style.display = 'none';
+                            
+                            if (isOnline) {
+                                // Reset button to normal state
+                                resetButtonState(button, true);
+                                window.open(url, '_blank');
+                            } else {
+                                // Set button to offline state
+                                resetButtonState(button, false);
+                                showOfflineModal(appName);
+                            }
+                        }).catch(() => {
+                            // Hide checking modal
+                            checkingModal.style.display = 'none';
+                            // Set button to offline state
+                            resetButtonState(button, false);
+                            showOfflineModal(appName);
+                        });
+                    } else if (url && url !== '#') {
                         window.open(url, '_blank');
                     } else {
                         alert('This application is not yet configured. Please contact your administrator.');
@@ -855,7 +1156,189 @@
                 localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
                 updateThemeIcon(isLightMode);
             });
+            
+            // Modal close button
+            modalCloseBtn.addEventListener('click', function() {
+                offlineModal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === offlineModal) {
+                    offlineModal.style.display = 'none';
+                }
+                if (event.target === checkingModal) {
+                    checkingModal.style.display = 'none';
+                }
+            });
+            
+            // Pre-check connectivity status on page load for critical systems
+            checkConnectivityOnLoad();
         });
+        
+        // Set button to checking state (grey with spinner)
+        function setButtonCheckingState(button) {
+            button.innerHTML = '<div class="button-spinner"></div> Checking...';
+            button.classList.remove('run-btn');
+            button.classList.remove('disabled-btn');
+            button.classList.add('checking-btn');
+        }
+        
+        // Reset button to either normal or offline state
+        function resetButtonState(button, isOnline) {
+            if (isOnline) {
+                button.innerHTML = '<i class="fas fa-external-link-alt"></i> Open';
+                button.classList.remove('checking-btn');
+                button.classList.remove('disabled-btn');
+                button.classList.add('run-btn');
+            } else {
+                button.innerHTML = '<i class="fas fa-unlink"></i> Offline';
+                button.classList.remove('checking-btn');
+                button.classList.remove('run-btn');
+                button.classList.add('disabled-btn');
+            }
+        }
+        
+        // Check connectivity status on page load
+        function checkConnectivityOnLoad() {
+            const systemsToCheck = ['CCTV', 'Internet Modem', 'Acrelec KIOSK', 'Drive-Trough'];
+            
+            systemsToCheck.forEach(systemName => {
+                const card = document.querySelector(`.app-card[data-name="${systemName}"]`);
+                if (card) {
+                    const url = card.getAttribute('data-url');
+                    const button = card.querySelector('.run-btn');
+                    
+                    // Set button to checking state initially
+                    setButtonCheckingState(button);
+                    
+                    // Check after a short delay to not slow down page load
+                    setTimeout(() => {
+                        checkConnectivity(url, systemName).then(isOnline => {
+                            // Update status in cache
+                            if (!connectivityStatus.status[systemName]) {
+                                connectivityStatus.status[systemName] = {};
+                            }
+                            connectivityStatus.status[systemName].isOnline = isOnline;
+                            connectivityStatus.status[systemName].lastChecked = Date.now();
+                            
+                            // Update button based on status
+                            resetButtonState(button, isOnline);
+                        }).catch(() => {
+                            // If check fails, assume offline
+                            if (!connectivityStatus.status[systemName]) {
+                                connectivityStatus.status[systemName] = {};
+                            }
+                            connectivityStatus.status[systemName].isOnline = false;
+                            connectivityStatus.status[systemName].lastChecked = Date.now();
+                            
+                            // Update button to offline state
+                            resetButtonState(button, false);
+                        });
+                    }, 2000);
+                }
+            });
+        }
+        
+        // Check if a system is online using multiple methods
+        function checkConnectivity(url, systemName) {
+            return new Promise((resolve, reject) => {
+                // Use cached status if it's still valid
+                if (connectivityStatus.status[systemName] && 
+                    Date.now() - connectivityStatus.status[systemName].lastChecked < connectivityStatus.cacheDuration) {
+                    resolve(connectivityStatus.status[systemName].isOnline);
+                    return;
+                }
+                
+                // Method 1: Try to fetch the URL
+                const fetchPromise = fetch(url, { 
+                    method: 'HEAD', 
+                    mode: 'no-cors',
+                    cache: 'no-store'
+                }).then(response => {
+                    // Even if we get an error response, the server is online
+                    resolve(true);
+                }).catch(() => {
+                    // Fetch failed, try next method
+                    throw new Error('Fetch failed');
+                });
+                
+                // Method 2: Try to load an image from the server
+                const imgPromise = new Promise((imgResolve, imgReject) => {
+                    const img = new Image();
+                    let timer = setTimeout(() => {
+                        imgReject(new Error('Image load timeout'));
+                    }, 5000);
+                    
+                    img.onload = function() {
+                        clearTimeout(timer);
+                        imgResolve(true);
+                    };
+                    
+                    img.onerror = function() {
+                        clearTimeout(timer);
+                        imgReject(new Error('Image load error'));
+                    };
+                    
+                    // Add timestamp to prevent caching
+                    img.src = url + '?t=' + new Date().getTime();
+                });
+                
+                // Method 3: Try to ping the server (using a workaround)
+                const pingPromise = new Promise((pingResolve, pingReject) => {
+                    // This is a workaround since we can't directly ping from browser
+                    const startTime = new Date().getTime();
+                    fetch(url, { 
+                        method: 'HEAD', 
+                        mode: 'no-cors',
+                        cache: 'no-store'
+                    }).then(() => {
+                        const endTime = new Date().getTime();
+                        const responseTime = endTime - startTime;
+                        // If response is reasonably fast, consider it online
+                        if (responseTime < 5000) {
+                            pingResolve(true);
+                        } else {
+                            pingReject(new Error('Ping timeout'));
+                        }
+                    }).catch(() => {
+                        pingReject(new Error('Ping failed'));
+                    });
+                });
+                
+                // Race between the methods - if any succeeds, system is online
+                Promise.any([fetchPromise, imgPromise, pingPromise])
+                    .then(() => {
+                        // Update cache
+                        if (!connectivityStatus.status[systemName]) {
+                            connectivityStatus.status[systemName] = {};
+                        }
+                        connectivityStatus.status[systemName].isOnline = true;
+                        connectivityStatus.status[systemName].lastChecked = Date.now();
+                        resolve(true);
+                    })
+                    .catch(() => {
+                        // Update cache
+                        if (!connectivityStatus.status[systemName]) {
+                            connectivityStatus.status[systemName] = {};
+                        }
+                        connectivityStatus.status[systemName].isOnline = false;
+                        connectivityStatus.status[systemName].lastChecked = Date.now();
+                        resolve(false);
+                    });
+            });
+        }
+        
+        // Show offline modal with system-specific information
+        function showOfflineModal(systemName) {
+            // Update modal with system-specific information
+            modalIcon.innerHTML = `<i class="fas ${systemInfo[systemName].offlineIcon}"></i>`;
+            modalTitle.textContent = `${systemInfo[systemName].name} Offline`;
+            modalMessage.textContent = systemInfo[systemName].message;
+            
+            // Show the modal
+            offlineModal.style.display = 'flex';
+        }
         
         // Load theme preference
         function loadThemePreference() {
